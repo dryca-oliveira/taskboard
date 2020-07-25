@@ -24,7 +24,7 @@
                 <template v-slot:default>
                     <thead>
                         <tr class="light-blue ">
-                            <th class="text-left " style="border-top-left-radius:50px !important;"></th>
+                            <th class="text-center " style="border-top-left-radius:50px !important;"></th>
                             <th class="text-center white--text text-h6" style="font-family: 'Viga', sans-serif !important;">SEGUNDA</th>
                             <th class="text-center white--text text-h6" style="font-family: 'Viga', sans-serif !important;">TERÇA</th>
                             <th class="text-center white--text text-h6" style="font-family: 'Viga', sans-serif !important;">QUARTA</th>
@@ -70,9 +70,9 @@
                                 <v-list-item class="px-1">
                                     <v-list-item-content>
                                         <v-list-item-title v-for="atividade in item.qua" :key="atividade.index">
-                                            <v-card class="text-center pt-3" height="40" color="teal accent-3">
-                                                {{ atividade }}
-                                            </v-card>
+                                            <v-chip class="ma-2" close color="teal accent-3" text-color="dark" @click:close="fechar(atividade.index, item.index, 'qua')">
+                                                <strong> {{ atividade.tarefa }} </strong>
+                                            </v-chip>
                                         </v-list-item-title>
                                     </v-list-item-content>
                                 </v-list-item>
@@ -81,9 +81,9 @@
                                 <v-list-item class="px-1">
                                     <v-list-item-content>
                                         <v-list-item-title v-for="atividade in item.qui" :key="atividade.index">
-                                            <v-card class="text-center pt-3" height="40" color="teal accent-3">
-                                                {{ atividade }}
-                                            </v-card>
+                                            <v-chip class="ma-2" close color="teal accent-3" text-color="dark" @click:close="fechar(atividade.index, item.index, 'qui')">
+                                                <strong> {{ atividade.tarefa }} </strong>
+                                            </v-chip>
                                         </v-list-item-title>
                                     </v-list-item-content>
                                 </v-list-item>
@@ -92,9 +92,9 @@
                                 <v-list-item class="px-1">
                                     <v-list-item-content>
                                         <v-list-item-title v-for="atividade in item.sex" :key="atividade.index">
-                                            <v-card class="text-center pt-3" height="40" color="teal accent-3">
-                                                {{ atividade }}
-                                            </v-card>
+                                            <v-chip class="ma-2" close color="teal accent-3" text-color="dark" @click:close="fechar(atividade.index, item.index, 'sex')">
+                                                <strong> {{ atividade.tarefa }} </strong>
+                                            </v-chip>
                                         </v-list-item-title>
                                     </v-list-item-content>
                                 </v-list-item>
@@ -103,9 +103,9 @@
                                 <v-list-item class="px-1">
                                     <v-list-item-content>
                                         <v-list-item-title v-for="atividade in item.sab" :key="atividade.index">
-                                            <v-card elevation="20" class="text-center pt-3" height="40" color="teal accent-3">
-                                                {{ atividade }}
-                                            </v-card>
+                                            <v-chip class="ma-2" close color="teal accent-3" text-color="dark" @click:close="fechar(atividade.index, item.index, 'sab')">
+                                                <strong> {{ atividade.tarefa }} </strong>
+                                            </v-chip>
                                         </v-list-item-title>
                                     </v-list-item-content>
                                 </v-list-item>
@@ -114,9 +114,9 @@
                                 <v-list-item class="px-1">
                                     <v-list-item-content>
                                         <v-list-item-title v-for="atividade in item.dom" :key="atividade.index">
-                                            <v-card class="text-center pt-3" height="40" color="teal accent-3">
-                                                {{ atividade }}
-                                            </v-card>
+                                            <v-chip class="ma-2" close color="teal accent-3" text-color="dark" @click:close="fechar(atividade.index, item.index, 'dom')">
+                                                <strong> {{ atividade.tarefa }} </strong>
+                                            </v-chip>
                                         </v-list-item-title>
                                     </v-list-item-content>
                                 </v-list-item>
@@ -344,7 +344,11 @@ export default {
                             break
                         case "qua":
                             if (this.tarefas[1].qua.length <= 2) {
-                                this.tarefas[1].qua.push(this.form.atividade)
+                                var id = this.tarefas[1].qua.length;
+                                this.tarefas[1].qua.push({
+                                    index: id,
+                                    tarefa: this.form.atividade
+                                })
                             } else {
                                 this.alerta = true
                                 return
@@ -352,7 +356,11 @@ export default {
                             break
                         case "qui":
                             if (this.tarefas[1].qui.length <= 2) {
-                                this.tarefas[1].qui.push(this.form.atividade)
+                                var id = this.tarefas[1].qui.length;
+                                this.tarefas[1].qui.push({
+                                    index: id,
+                                    tarefa: this.form.atividade
+                                })
                             } else {
                                 this.alerta = true
                                 return
@@ -360,7 +368,11 @@ export default {
                             break
                         case "sex":
                             if (this.tarefas[1].sex.length <= 2) {
-                                this.tarefas[1].sex.push(this.form.atividade)
+                                var id = this.tarefas[1].sex.length;
+                                this.tarefas[1].sex.push({
+                                    index: id,
+                                    tarefa: this.form.atividade
+                                })
                             } else {
                                 this.alerta = true
                                 return
@@ -368,7 +380,11 @@ export default {
                             break
                         case "sab":
                             if (this.tarefas[1].sab.length <= 2) {
-                                this.tarefas[1].sab.push(this.form.atividade)
+                                var id = this.tarefas[1].sab.length;
+                                this.tarefas[1].sab.push({
+                                    index: id,
+                                    tarefa: this.form.atividade
+                                })
                             } else {
                                 this.alerta = true
                                 return
@@ -376,7 +392,11 @@ export default {
                             break
                         case "dom":
                             if (this.tarefas[1].dom.length <= 2) {
-                                this.tarefas[1].dom.push(this.form.atividade)
+                                var id = this.tarefas[1].dom.length;
+                                this.tarefas[1].dom.push({
+                                    index: id,
+                                    tarefa: this.form.atividade
+                                })
                             } else {
                                 this.alerta = true
                                 return
@@ -388,7 +408,11 @@ export default {
                     switch (this.form.dia) {
                         case "seg":
                             if (this.tarefas[2].seg.length <= 2) {
-                                this.tarefas[2].seg.push(this.form.atividade)
+                                var id = this.tarefas[2].seg.length;
+                                this.tarefas[2].seg.push({
+                                    index: id,
+                                    tarefa: this.form.atividade
+                                })
                             } else {
                                 this.alerta = true
                                 return
@@ -396,7 +420,11 @@ export default {
                             break
                         case "ter":
                             if (this.tarefas[2].ter.length <= 2) {
-                                this.tarefas[2].ter.push(this.form.atividade)
+                                var id = this.tarefas[2].ter.length;
+                                this.tarefas[2].ter.push({
+                                    index: id,
+                                    tarefa: this.form.atividade
+                                })
                             } else {
                                 this.alerta = true
                                 return
@@ -404,7 +432,11 @@ export default {
                             break
                         case "qua":
                             if (this.tarefas[2].qua.length <= 2) {
-                                this.tarefas[2].qua.push(this.form.atividade)
+                                var id = this.tarefas[2].qua.length;
+                                this.tarefas[2].qua.push({
+                                    index: id,
+                                    tarefa: this.form.atividade
+                                })
                             } else {
                                 this.alerta = true
                                 return
@@ -412,7 +444,11 @@ export default {
                             break
                         case "qui":
                             if (this.tarefas[2].qui.length <= 2) {
-                                this.tarefas[2].qui.push(this.form.atividade)
+                                var id = this.tarefas[2].qui.length;
+                                this.tarefas[2].qui.push({
+                                    index: id,
+                                    tarefa: this.form.atividade
+                                })
                             } else {
                                 this.alerta = true
                                 return
@@ -420,7 +456,11 @@ export default {
                             break
                         case "sex":
                             if (this.tarefas[2].sex.length <= 2) {
-                                this.tarefas[2].sex.push(this.form.atividade)
+                                var id = this.tarefas[2].sex.length;
+                                this.tarefas[2].sex.push({
+                                    index: id,
+                                    tarefa: this.form.atividade
+                                })
                             } else {
                                 this.alerta = true
                                 return
@@ -428,7 +468,11 @@ export default {
                             break
                         case "sab":
                             if (this.tarefas[2].sab.length <= 2) {
-                                this.tarefas[2].sab.push(this.form.atividade)
+                                var id = this.tarefas[2].sab.length;
+                                this.tarefas[2].sab.push({
+                                    index: id,
+                                    tarefa: this.form.atividade
+                                })
                             } else {
                                 this.alerta = true
                                 return
@@ -436,7 +480,11 @@ export default {
                             break
                         case "dom":
                             if (this.tarefas[2].dom.length <= 2) {
-                                this.tarefas[2].dom.push(this.form.atividade)
+                                var id = this.tarefas[2].dom.length;
+                                this.tarefas[2].dom.push({
+                                    index: id,
+                                    tarefa: this.form.atividade
+                                })
                             } else {
                                 this.alerta = true
                                 return
@@ -457,19 +505,31 @@ export default {
             this.form.turno = ""
             this.dialog = false
         },
-        fechar(index, indexTarefa, dia) {         
+        fechar(index, indexTarefa, dia) {
 
-            if(dia ==='seg'){
-                  var position = this.tarefas[indexTarefa].seg.indexOf(index)
-                  this.tarefas[indexTarefa].seg.splice(position, 1);
+            if (dia === 'seg') {
+                var position = this.tarefas[indexTarefa].seg.indexOf(index)
+                this.tarefas[indexTarefa].seg.splice(position, 1);
+            } else if (dia === 'ter') {
+                var position = this.tarefas[indexTarefa].ter.indexOf(index)
+                this.tarefas[indexTarefa].ter.splice(position, 1);
+            } else if (dia === 'qua') {
+                var position = this.tarefas[indexTarefa].qua.indexOf(index)
+                this.tarefas[indexTarefa].qua.splice(position, 1);
+            } else if (dia === 'qui') {
+                var position = this.tarefas[indexTarefa].qui.indexOf(index)
+                this.tarefas[indexTarefa].qui.splice(position, 1);
+            } else if (dia === 'sex') {
+                var position = this.tarefas[indexTarefa].sex.indexOf(index)
+                this.tarefas[indexTarefa].sex.splice(position, 1);
+            } else if (dia === 'sab') {
+                var position = this.tarefas[indexTarefa].sab.indexOf(index)
+                this.tarefas[indexTarefa].sab.splice(position, 1);
+            } else if (dia === 'dom') {
+                var position = this.tarefas[indexTarefa].dom.indexOf(index)
+                this.tarefas[indexTarefa].dom.splice(position, 1);
             }
-                     else if(dia ==='ter'){
-                  var position = this.tarefas[indexTarefa].ter.indexOf(index)
-                  this.tarefas[indexTarefa].ter.splice(position, 1);
-            }
-          
 
-         
 
         }
     },
@@ -484,6 +544,7 @@ export default {
     padding-left: 15px !important;
     padding-right: 0px !important;
     width: 10%;
+    background-color: #7E57C2;
 }
 
 #fonte {
